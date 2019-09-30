@@ -1,16 +1,17 @@
-const webpack = require('webpack');
-const ejs = require('ejs');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtensionReloader = require('webpack-extension-reloader');
-const { VueLoaderPlugin } = require('vue-loader');
-const { version } = require('./package.json');
+/* eslint-disable no-path-concat */
+const webpack = require('webpack')
+const ejs = require('ejs')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ExtensionReloader = require('webpack-extension-reloader')
+const { VueLoaderPlugin } = require('vue-loader')
+const { version } = require('./package.json')
 
 const config = {
   mode: process.env.NODE_ENV,
   context: __dirname + '/src',
   entry: {
-    'background': './background.js',
+    background: './background.js',
     'popup/popup': './popup/popup.js',
     'options/options': './options/options.js',
   },
@@ -79,20 +80,20 @@ const config = {
       {
         from: 'manifest.json',
         to: 'manifest.json',
-        transform: (content) => {
-          const jsonContent = JSON.parse(content);
-          jsonContent.version = version;
+        transform: content => {
+          const jsonContent = JSON.parse(content)
+          jsonContent.version = version
 
           if (config.mode === 'development') {
-            jsonContent['content_security_policy'] = "script-src 'self' 'unsafe-eval'; object-src 'self'";
+            jsonContent['content_security_policy'] = "script-src 'self' 'unsafe-eval'; object-src 'self'"
           }
 
-          return JSON.stringify(jsonContent, null, 2);
+          return JSON.stringify(jsonContent, null, 2)
         },
       },
     ]),
   ],
-};
+}
 
 if (config.mode === 'production') {
   config.plugins = (config.plugins || []).concat([
@@ -101,7 +102,7 @@ if (config.mode === 'production') {
         NODE_ENV: '"production"',
       },
     }),
-  ]);
+  ])
 }
 
 if (process.env.HMR === 'true') {
@@ -109,13 +110,13 @@ if (process.env.HMR === 'true') {
     new ExtensionReloader({
       manifest: __dirname + '/src/manifest.json',
     }),
-  ]);
+  ])
 }
 
 function transformHtml(content) {
   return ejs.render(content.toString(), {
     ...process.env,
-  });
+  })
 }
 
-module.exports = config;
+module.exports = config
