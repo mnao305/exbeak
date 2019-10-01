@@ -8,5 +8,5 @@ exports.tweet = functions.region('asia-northeast1').https.onRequest((request, re
   // TODO
   // ツイート処理を書く
 
-  response.send('ok')
+  response.send('hogefuga')
 })
