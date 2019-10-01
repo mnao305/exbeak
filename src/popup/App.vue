@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="popup">
     <router-view />
   </div>
 </template>
@@ -11,3 +11,15 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+#popup {
+  width: 320px;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+</style>

@@ -7,6 +7,11 @@ export default {
   data() {
     return {}
   },
+  mounted() {
+    // TODO
+    // ここにログイン済みか確認する処理を書く
+    this.$router.push('/login')
+  },
 }
 </script>
 
