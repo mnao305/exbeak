@@ -2,7 +2,9 @@
   <div>
     <textarea v-model="tweetText" id="tweetText" name="tweetText" cols="30" rows="10" />
     <div id="subArea">
-      {{ message }}
+      <span>
+        {{ message }}
+      </span>
       <button class="tweetBtn" @click="tweet">Tweet</button>
     </div>
   </div>
@@ -57,8 +59,10 @@ textarea {
   width: 100%;
   resize: vertical;
 }
-.tweetBtn {
-  display: block;
-  margin: 0 0 0 auto;
+#subArea {
+  height: 25px;
+  .tweetBtn {
+    float: right;
+  }
 }
 </style>
