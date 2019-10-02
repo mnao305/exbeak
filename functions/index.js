@@ -2,6 +2,7 @@ const functions = require('firebase-functions')
 const admin = require('firebase-admin')
 const Twitter = require('twit')
 const cors = require('cors')({ origin: true })
+admin.initializeApp()
 
 exports.tweet = functions.region('asia-northeast1').https.onRequest((request, response) => {
   cors(request, response, async () => {
@@ -41,7 +42,7 @@ exports.tweet = functions.region('asia-northeast1').https.onRequest((request, re
       const tweetRes = await client.post('statuses/update', {
         status: request.body.tweet,
       })
-      response.send(tweetRes)
+      response.send(tweetRes.data)
     } catch (error) {
       response.status(500).send(error)
     }
