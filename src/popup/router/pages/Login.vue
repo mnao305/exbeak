@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="login">
     <h2>ログイン</h2>
     <button @click="twitterLogin">Twitterでログインする</button>
   </div>
@@ -17,14 +17,10 @@ export default {
     async twitterLogin() {
       try {
         const data = await auth.twitterLogin()
-        const dbData = await db
-          .collection('users')
-          .doc(data.user.uid)
-          .get()
 
         await db
           .collection('users')
-          .doc(dbData.id)
+          .doc(data.user.uid)
           .set(
             {
               accessToken: data.credential.accessToken,
@@ -40,3 +36,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+#login {
+  height: 100px;
+}
+</style>
