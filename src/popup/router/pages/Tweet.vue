@@ -1,6 +1,6 @@
 <template>
   <div>
-    <textarea v-model="tweetText" id="tweetText" name="tweetText" cols="30" rows="10" />
+    <textarea v-model="tweetText" id="tweetText" name="tweetText" cols="30" rows="10" @keydown.enter.ctrl="tweet" />
     <div id="subArea">
       <span>
         {{ message }}
