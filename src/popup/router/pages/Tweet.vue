@@ -1,6 +1,6 @@
 <template>
   <div>
-    <textarea v-model="tweetText" id="tweetText" name="tweetText" cols="30" rows="10" @keydown.enter.ctrl="tweet" />
+    <textarea v-model="tweetText" id="tweetText" name="tweetText" cols="30" @keydown.enter.ctrl="tweet" :rows="tweetRowSize" />
     <div id="subArea">
       <span>
         {{ message }}
@@ -13,13 +13,22 @@
 <script>
 import firebase from '@/plugins/firebase'
 import axios from 'axios'
+import Browser from 'webextension-polyfill'
+
 export default {
   data() {
     return {
       tweetText: '',
       message: '',
       timerID: null,
+      tweetRowSize: '10',
     }
+  },
+  async mounted() {
+    const data = await Browser.storage.local.get({
+      tweetRowSize: '10',
+    })
+    this.tweetRowSize = data.tweetRowSize
   },
   methods: {
     async tweet() {
